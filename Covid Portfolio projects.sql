@@ -1,4 +1,4 @@
---querying the need data from the covdeath dataset
+--querying the needed data from the covDeath dataset
 Select location, date, total_cases, new_cases,total_deaths, population
 FROM portfolio..coviddeath$
 ORDER BY 1,2
