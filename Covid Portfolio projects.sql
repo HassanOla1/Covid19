@@ -19,20 +19,39 @@ ORDER BY 1,2
 -- total_cases to Population
 Select location, convert(varchar(11),date,110) as date, population,
 total_cases, 
-(total_cases/population)* 100 AS percentagePopulationInfection
+(total_cases/population)* 100 AS percentagePeopleInfection
 FROM portfolio..coviddeath$
 WHERE location = 'Nigeria' AND continent is not null
 ORDER BY 1,2
 
+
+--Highest infected African countries  compare to population
+Select location, population,
+Max(total_cases) AS HighestInfectionCount, 
+Max((total_cases/population))* 100 AS percentagePeopleInfected
+FROM portfolio..coviddeath$
+WHERE continent is not null
+AND continent = 'Africa'
+GROUP BY location, population
+ORDER BY percentagePeopleInfected DESC
+
+-- Highest African countries death count per population
+Select location,population, 
+Max(cast(total_deaths AS int)) AS HighestDeathCount
+FROM portfolio..coviddeath$
+WHERE continent is not null
+AND continent = 'Africa'
+GROUP BY location, population
+ORDER BY HighestDeathCount DESC
+
 -- Highest infected countries compare to population 
 Select location, population,
 Max(total_cases) AS HighestInfectionCount, 
-Max((total_cases/population))* 100 AS percentagePopulationInfected
+Max((total_cases/population))* 100 AS percentagePeopleInfected
 FROM portfolio..coviddeath$
 WHERE continent is not null
 GROUP BY location, population
-ORDER BY percentagePopulationInfected DESC
-
+ORDER BY percentagePeopleInfected DESC
 
 -- Highest death count per population
 Select location,population, 
@@ -44,6 +63,7 @@ ORDER BY HighestDeathCount DESC
 
 
 --Highest death count by continent
+
 Select continent,
 Max(cast(total_deaths AS int)) AS TotalDeathCount
 FROM portfolio..coviddeath$
