@@ -1,4 +1,4 @@
-# COVID-19 Data Analysis
+# COVID-19
 
 This repository contains a series of SQL queries used for analyzing COVID-19 data. The analysis covers various aspects such as infection rates, death rates, and vaccination rates across different regions, with a particular focus on Nigeria and Africa.
 
